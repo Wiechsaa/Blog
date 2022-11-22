@@ -1,22 +1,24 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
+    @post.update(views: @post.views + 1)
   end
 
   def new
     @post = Post.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -46,11 +48,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def post_params
-      params.require(:post).permit(:title, :body)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
 end

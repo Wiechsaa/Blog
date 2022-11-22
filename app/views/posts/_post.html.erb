@@ -1,10 +1,18 @@
 <div id="<%= dom_id post %>">
   <p>
     <h1><%= post.title %></h1>
+    <small>
+      <h5 class="text-muted">Created by <%= link_to post.user.name, user_path(post.user) %></h5>
+      <h6 class="text-muted"><%= pluralize(post.views, 'view') %></h6>
+    </small>
   </p>
 
   <p>
     <%= post.body %>
+  </p>
+
+  <p>
+
   </p>
 
 </div>
