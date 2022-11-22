@@ -4,7 +4,7 @@ def create_users
   puts 'Creating Users'
   return if User.count >= 1
 
-  @user = User.create(email: 'user@example.com', password: 'password', password_confirmation: 'password')
+  @user = User.create(email: 'user@example.com', name: 'User', password: 'password', password_confirmation: 'password')
 end
 
 def create_posts
