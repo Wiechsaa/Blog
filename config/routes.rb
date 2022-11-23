@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'users/profile'
   root 'pages#home'
+  get 'search', to: 'search#index'
+  get 'users/profile'
   get '/about', to: 'pages#about'
 
   devise_for :users, controllers: {
