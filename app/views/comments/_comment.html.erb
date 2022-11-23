@@ -1,4 +1,4 @@
-<div class="comment-<%= comment.id %> container" style="border: 1px solid black; padding: 1em, margin: 1em">
+<div class="comment-<%= comment.id %> container mt-3" style="border: 1px solid black; padding: 1em, margin: 1em">
   <%= comment.user.email %> <br />
 
   <% if (comment.created_at - comment.updated_at) > 1 %>
@@ -13,11 +13,13 @@
                   nil, 
                   remote: true, 
                   class: "btn btn-warning", 
+                  id: "edit-button-#{comment.id}",
                   data: { 
                     controller: "comments", 
                     action: "comments#toggleForm", 
                     comments_form_param: "edit-form-#{comment.id}",
-                    comments_body_param: "comment-body-#{comment.id}"  
+                    comments_body_param: "comment-body-#{comment.id}",
+                    comments_edit_param: "edit-button-#{comment.id}"  
                   } %>
 
       <%= button_to "Delete", 
