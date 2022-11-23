@@ -14,8 +14,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = @post.comments.find_by(id: params[:id])
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to post_url(@post), notice: 'Comment has been updated.' }
+      else
+        format.html { redirect_to post_url(@post), alert: 'Comment was not updated' }
+      end
+    end
+  end
+
   def destroy
-    @comment = @post.comment.find_by(id: params[:id])
+    @comment = @post.comments.find_by(id: params[:id])
     @comment.destroy
     redirect_to post_path(@post)
   end

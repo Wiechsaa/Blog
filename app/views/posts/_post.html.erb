@@ -1,6 +1,6 @@
 <div id="<%= dom_id post %>">
   <p>
-    <h1><%= post.title %></h1>
+    <h1><%= link_to post.title, post, class: "text-reset text-decoration-none" %></h1>
     <small>
       <h5 class="text-muted">Created by <%= link_to post.user.name, user_path(post.user) %></h5>
       <h6 class="text-muted"><%= pluralize(post.views, 'view') %></h6>
