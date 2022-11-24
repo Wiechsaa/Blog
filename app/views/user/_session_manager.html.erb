@@ -8,6 +8,7 @@
         <%= link_to "New Post", new_post_path, class: "dropdown-item" %>
         <li><hr class="dropdown-divider"></li>
         <%= link_to "Edit account", edit_user_registration_path, class: "dropdown-item" %>
+        <%= link_to "Admin", admin_path, class: "dropdown-item" if current_user.admin? %>
         <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </ul>
     </li>

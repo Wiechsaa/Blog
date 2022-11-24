@@ -6,15 +6,29 @@ def create_users
   puts 'Creating Users'
   return if User.count >= 1
 
-  @user = User.create(email: 'user@example.com', name: 'User', password: 'password', password_confirmation: 'password')
+  @admin = User.create(email: 'wiechsa@example.com',
+                       name: 'Wiechsa',
+                       role: User.roles[:admin],
+                       password: 'password',
+                       password_confirmation: 'password')
+
+  @user = User.create(email: 'user@example.com',
+                      name: 'Example',
+                      role: User.roles[:user],
+                      password: 'password',
+                      password_confirmation: 'password')
 end
 
 def create_posts
   puts 'Creating Posts'
-  return if Post.count >= 5
+  return if Post.count >= 3
 
-  5.times do |i|
-    Post.create(title: "Post #{i + 1}", body: Faker::Lorem.paragraph, user_id: User.first.id)
+  3.times do |i|
+    post = Post.create(title: "Post #{i + 1}", body: Faker::Lorem.paragraph, user_id: User.first.id)
+
+    3.times do |y|
+      Comment.create(body: "Comment #{y + 1}", user_id: User.second.id, post_id: post.id)
+    end
   end
 end
 

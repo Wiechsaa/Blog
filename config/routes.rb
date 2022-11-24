@@ -15,4 +15,12 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  authenticated :user, ->(user) { user.admin? } do
+    get 'admin', to: 'admin#index'
+    get 'admin/posts'
+    get 'admin/comments'
+    get 'admin/users'
+    get 'admin/show_post/:id', to: 'admin#show_post', as: 'admin_post'
+  end
 end
