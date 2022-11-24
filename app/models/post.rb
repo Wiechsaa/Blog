@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  extend FriendlyId
+
+  friendly_id :title, use: %i[slugged history finders]
+
   validates :title, presence: true
   validates :body, presence: true
 
@@ -12,4 +16,8 @@ class Post < ApplicationRecord
 
   belongs_to :user
   has_many :comments, dependent: :destroy
+
+  def should_generate_new_friendly_id?
+    title_changed? || slug.blank?
+  end
 end
