@@ -16,13 +16,13 @@ class CommentNotification < Noticed::Base
   # param :post
 
   def message
-    @post = Post.find_by(id: params[:comment][:post_id])
-    @comment = Comment.find_by(id: params[:comment][:id])
-    @user = User.find_by(id: @comment.user_id)
+    @post = Post.find(params[:comment][:post_id])
+    @comment = Comment.find(params[:comment][:id])
+    @user = User.find(@comment.user_id)
     "#{@user.email} commented on #{@post.title.truncate(10)}"
   end
 
   def url
-    post_path(Post.find_by(id: params[:comment][:post_id]))
+    post_path(Post.find(params[:comment][:post_id]))
   end
 end
