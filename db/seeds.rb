@@ -19,12 +19,24 @@ def create_users
                       password_confirmation: 'password')
 end
 
+def create_categories
+  puts 'Creating Categories'
+  return if Category.count >= 3
+
+  Category.create(name: 'Uncategorized', visible: true)
+  Category.create(name: 'Programing', visible: true)
+  Category.create(name: 'Gaming', visible: true)
+end
+
 def create_posts
   puts 'Creating Posts'
   return if Post.count >= 3
 
   3.times do |i|
-    post = Post.create(title: "Post #{i + 1}", body: Faker::Lorem.paragraph, user_id: User.first.id)
+    post = Post.create(title: "Post #{i + 1}",
+                       body: Faker::Lorem.paragraph,
+                       category: Category.first,
+                       user_id: User.first.id)
 
     3.times do |y|
       Comment.create(body: "Comment #{y + 1}", user_id: User.second.id, post_id: post.id)
@@ -33,4 +45,5 @@ def create_posts
 end
 
 create_users
+create_categories
 create_posts

@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   has_one :content, class_name: 'ActionText::RichText', as: :record
 
   belongs_to :user
+  belongs_to :category
   has_many :comments, dependent: :destroy
 
   def should_generate_new_friendly_id?

@@ -8,6 +8,7 @@
       <th scope="col">Post</th>
       <th scope="col">Author</th>
       <th scope="col">Comments</th>
+      <th scope="col">Category</th>
     </tr>
   </thead>
 
@@ -18,6 +19,7 @@
         <td><%= link_to post.title.truncate(15), admin_post_path(post) %></td>
         <td><%= post.user.name %></td>
         <td><%= pluralize(post.comments.size, "Comment") %></td>
+        <td><%= post.category.name %></td>
       </tr>
     <% end %>
   </tbody>

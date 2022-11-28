@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th><%= sort_link(@query, :title, "Title", default_order: :asc) %></th>
+        <th><%= sort_link(@query, :category_name, "Category") %></th>
         <th><%= sort_link(@query, :body, "Blog Content") %></th>
         <th><%= sort_link(@query, :user_name, "Users") %></th>
       </tr>
@@ -14,6 +15,7 @@
       <% @posts.each do |post| %>
         <tr>
           <td><%= link_to post.title, post %></td>
+          <td><%= link_to post.category.name, post.category %></td>
           <td><%= post.body.to_plain_text.truncate_words(25) %></td>
           <td><%= link_to post.user.name, post.user %></td>
         </tr>

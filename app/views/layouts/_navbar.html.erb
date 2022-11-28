@@ -10,7 +10,7 @@
           <%= link_to "Blog", posts_path, class: "nav-link" %>
         </li>
         <li>
-          <%= link_to "About me", about_path, class: "nav-link" %>
+          <%= render 'layouts/categories', categories: @nav_categories %>
         </li>
       </ul>
       <%= render 'search/form' %>
