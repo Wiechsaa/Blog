@@ -10,6 +10,9 @@
           <%= link_to "Blog", posts_path, class: "nav-link" %>
         </li>
         <li>
+          <%= link_to "Portfolio", projects_path, class: "nav-link" %>
+        </li>
+        <li>
           <%= render 'layouts/categories', categories: @nav_categories %>
         </li>
       </ul>
