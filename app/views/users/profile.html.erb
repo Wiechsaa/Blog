@@ -1,3 +1,33 @@
-<div class="container mt-1">
-  <h1><%= @user.name %></h1>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag(@user.avatar, style: "width:150px; height:150px; border-radius:100%") if @user.avatar.attached? %>
+    </div>
+    <div class="col-8">
+      <h1><%= @user.name %></h1>
+      <h6><%= pluralize(@user.posts.size, "Post") %></h6>
+      <h6><%= pluralize(@user.comments.size, "Comment") %></h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <% @posts.each do |post| %>
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to post.title, post %>
+            </h5>
+            <p>
+              <%= "#{time_ago_in_words(post.created_at)} ago" %>
+            </p>
+            <p class="card-text">
+              <%= post.body.to_plain_text.truncate_words(100) %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-1"></div>
+  </div>
 </div>

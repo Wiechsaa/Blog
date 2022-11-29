@@ -3,7 +3,9 @@
 class UsersController < ApplicationController
   before_action :set_user
 
-  def profile; end
+  def profile
+    @posts = @user.posts.includes(:rich_text_body).order(created_at: :desc)
+  end
 
   private
 
